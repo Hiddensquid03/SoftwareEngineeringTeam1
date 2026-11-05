@@ -1,9 +1,33 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Login";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Login</h1>
-    <p> This is the Login page for the Recall Terminal</p>
+<div style="display: flex; justify-content: center; align-items: center; min-height: 75vh;">
+    <div style="width: 100%; max-width: 480px; padding: 40px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); border-radius: 12px; background: #ffffff; border: 1px solid #e0e0e0;">
+        <h2 style="text-align: center; margin-bottom: 30px; font-weight: bold; font-size: 28px; color: #333;">Login</h2>
 
+        @if (ViewBag.Error != null)
+        {
+            <div style="background-color: #f8d7da; color: #842029; padding: 12px; margin-bottom: 20px; border-radius: 6px; text-align: center; font-weight: 500;">
+                @ViewBag.Error
+            </div>
+        }
+
+        <!-- Changed from asp-action to explicit action path to guarantee routing works -->
+        <form action="/Home/Login" method="post">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #495057;">Username</label>
+                <input type="text" name="username" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box;" placeholder="Enter username" required />
+            </div>
+
+            <div style="margin-bottom: 30px;">
+                <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #495057;">Password</label>
+                <input type="password" name="password" style="width: 100%; padding: 14px; font-size: 16px; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box;" placeholder="Enter password" required />
+            </div>
+
+            <button type="submit" style="width: 100%; padding: 14px; font-size: 18px; font-weight: bold; background-color: #0d6efd; color: white; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.2s;">
+                Login
+            </button>
+        </form>
+    </div>
 </div>
