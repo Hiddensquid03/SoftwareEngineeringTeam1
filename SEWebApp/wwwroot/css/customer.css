@@ -1,0 +1,96 @@
+﻿
+.customer-page {
+    max-width: 1150px;
+    margin: 30px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.customer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.company-logo {
+    border: 2px solid #222;
+    padding: 20px 45px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.customer-status {
+    border: 1px solid #333;
+    padding: 15px 25px;
+    border-radius: 5px;
+}
+
+.customer-page h2 {
+    margin-top: 45px;
+    margin-bottom: 15px;
+}
+
+.page-description {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.search-input,
+.sort-select {
+    padding: 12px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-button {
+    background: #174a7e;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .filter-button:hover {
+        background: #10365c;
+    }
+
+.clear-button {
+    padding: 12px 20px;
+    color: #174a7e;
+    text-decoration: none;
+}
+
+.notice-list {
+    margin-top: 25px;
+}
+
+.notice-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 18px;
+    background: #fafafa;
+}
+
+    .notice-card h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .notice-card p {
+        margin-bottom: 8px;
+    }
