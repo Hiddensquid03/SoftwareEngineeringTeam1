@@ -1,0 +1,69 @@
+﻿@model SEWebApp.Models.CreateReportViewModel
+
+@{
+    ViewData["Title"] = "Create Recall Report";
+}
+
+<div class="container mt-4">
+
+    <h2>Create Recall Report</h2>
+
+    <!-- Recall Information taken from Database -->
+    <div class="card mb-4">
+        <div class="card-body">
+
+            <h4>Recall Information</h4>
+
+            <p><strong>Recall Number:</strong> 
+                @Model.RecallNumber</p>
+
+            <p><strong>Firm Name:</strong>
+                @Model.FirmName</p>
+
+            <p><strong>Trade Name:</strong>
+                @Model.TradeName</p>
+
+            <p><strong>Product Description:</strong>
+                @Model.ProductDescription</p>
+
+            <p><strong>Manufacturer Recall Reason:</strong>
+                @Model.ManufacturerRecallReason</p>
+
+        </div>
+    </div>
+
+    <!-- Report Writing -->
+    <form method="post">
+
+        <input type="hidden"
+            asp-for="RecallNumber" />
+
+        <h4>Write Report</h4>
+
+        <div class="mb-4">
+
+            <textarea asp-for="ReportText"
+                      class="form-control"
+                      rows="20"
+                      style="width:100%; resize:vertical;"
+                      placeholder="Please write your report here...">
+            </textarea>
+
+        </div>
+
+
+        <button type="submit"
+                formaction="/CreateReport/SaveDraft"
+                class="btn btn-secondary">
+            Save Draft
+        </button>
+
+        <button type="submit"
+                formaction="/CreateReport/Publish"
+                class="btn btn-success">
+            Publish Report
+        </button>
+
+    </form>
+
+</div>
