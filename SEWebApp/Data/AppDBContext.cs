@@ -4,14 +4,13 @@
     using SEWebApp.Models;
     using System.Collections.Generic;
 
-    public class AppDBContext : DBContext
+    public class AppDBContext : DbContext
     {
         // Database properties defined here
-        // Just a placeholder for now, shows where CreateReportController.cs will pull the info from
         public AppDBContext(DbContextOptions<AppDBContext> options)
             : base(options)
         {
         }
-        public DbSet<CreateReportViewModel> RecallNotices { get; set; }
+        public DbSet<RecallNotice> RecallNotices { get; set; }
     }
 }

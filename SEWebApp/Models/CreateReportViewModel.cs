@@ -2,11 +2,11 @@
 {
     public class CreateReportViewModel
     {
-        public string RecallNumber { get; set; } = "";
-        public string FirmName { get; set; } = "";
-        public string TradeName { get; set; } = "";
-        public string ProductDescription { get; set; } = "";
-        public string ManufacturerRecallReason { get; set; } = "";
+        public string RECALL_NUMBER { get; set; } = "";
+        public string FIRM_NAME { get; set; } = "";
+        public string TRADE_NAME { get; set; } = "";
+        public string PRODUCT_DESCRIPTION { get; set; } = "";
+        public string MANUFACTURER_RECALL_REASON { get; set; } = "";
         public string ReportText { get; set; } = "";
     }
 }

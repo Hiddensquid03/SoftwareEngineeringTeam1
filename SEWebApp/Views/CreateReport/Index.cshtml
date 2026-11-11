@@ -15,19 +15,19 @@
             <h4>Recall Information</h4>
 
             <p><strong>Recall Number:</strong> 
-                @Model.RecallNumber</p>
+                @Model.RECALL_NUMBER</p>
 
             <p><strong>Firm Name:</strong>
-                @Model.FirmName</p>
+                @Model.FIRM_NAME</p>
 
             <p><strong>Trade Name:</strong>
-                @Model.TradeName</p>
+                @Model.TRADE_NAME</p>
 
             <p><strong>Product Description:</strong>
-                @Model.ProductDescription</p>
+                @Model.PRODUCT_DESCRIPTION</p>
 
             <p><strong>Manufacturer Recall Reason:</strong>
-                @Model.ManufacturerRecallReason</p>
+                @Model.MANUFACTURER_RECALL_REASON</p>
 
         </div>
     </div>
@@ -36,7 +36,7 @@
     <form method="post">
 
         <input type="hidden"
-            asp-for="RecallNumber" />
+            asp-for="RECALL_NUMBER" />
 
         <h4>Write Report</h4>
 

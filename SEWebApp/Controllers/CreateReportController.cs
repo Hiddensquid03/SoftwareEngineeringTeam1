@@ -24,7 +24,7 @@ namespace SEWebApp.Controllers
 
             //Finding the Recall Notice in the database
             var recallNotice = await _context.RecallNotices
-                .FirstOrDefaultAsync(r => r.RecallNumber == recallNumber);
+                .FirstOrDefaultAsync(r => r.RECALL_NUMBER == recallNumber);
             
             if (recallNotice == null)
             {
@@ -34,11 +34,11 @@ namespace SEWebApp.Controllers
             //Transferring the data from the Recall Notice to the CreateReportViewModel
             var createReportViewModel = new CreateReportViewModel
             {
-                RecallNumber = recallNotice.RecallNumber,
-                FirmName = recallNotice.FirmName,
-                TradeName = recallNotice.TradeName,
-                ProductDescription = recallNotice.ProductDescription,
-                ManufacturerRecallReason = recallNotice.ManufacturerRecallReason
+                RECALL_NUMBER = recallNotice.RECALL_NUMBER,
+                FIRM_NAME = recallNotice.FIRM_NAME,
+                TRADE_NAME = recallNotice.TRADE_NAME,
+                PRODUCT_DESCRIPTION = recallNotice.PRODUCT_DESCRIPTION,
+                MANUFACTURER_RECALL_REASON = recallNotice.MANUFACTURER_RECALL_REASON
             };
 
             return View(createReportViewModel);
@@ -53,7 +53,7 @@ namespace SEWebApp.Controllers
                 // Logic to save the report as a draft
                 // This could involve saving to a database or session
                 TempData["DraftSaved"] = "Report Successfully Saved as Draft";
-                return RedirectToAction("Index", new { recallNumber = model.RecallNumber });
+                return RedirectToAction("Index", new { recallNumber = model.RECALL_NUMBER });
             }
             // If the model state is invalid, return the same view with validation messages
             return View("Index", model);
