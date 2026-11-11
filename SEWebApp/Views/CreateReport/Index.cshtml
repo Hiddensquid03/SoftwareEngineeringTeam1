@@ -8,49 +8,44 @@
 
     <h2>Create Recall Report</h2>
 
-    <!-- Recall Information taken from Database -->
     <div class="card mb-4">
         <div class="card-body">
 
             <h4>Recall Information</h4>
 
-            <p><strong>Recall Number:</strong> 
-                @Model.RECALL_NUMBER</p>
-
-            <p><strong>Firm Name:</strong>
-                @Model.FIRM_NAME</p>
-
-            <p><strong>Trade Name:</strong>
-                @Model.TRADE_NAME</p>
-
-            <p><strong>Product Description:</strong>
-                @Model.PRODUCT_DESCRIPTION</p>
-
-            <p><strong>Manufacturer Recall Reason:</strong>
-                @Model.MANUFACTURER_RECALL_REASON</p>
+            <p><strong>Recall Number:</strong> @Model.RECALL_NUMBER</p>
+            <p><strong>Firm Name:</strong> @Model.FIRM_NAME</p>
+            <p><strong>Trade Name:</strong> @Model.TRADE_NAME</p>
+            <p><strong>Product Description:</strong> @Model.PRODUCT_DESCRIPTION</p>
+            <p><strong>Manufacturer Recall Reason:</strong> @Model.MANUFACTURER_RECALL_REASON</p>
 
         </div>
     </div>
 
     <!-- Report Writing -->
+
     <form method="post">
 
+        <!-- Explicitly send the recall number to the controller -->
         <input type="hidden"
-            asp-for="RECALL_NUMBER" />
+               name="RECALL_NUMBER"
+               value="@Model.RECALL_NUMBER" />
+
+        <input type="hidden"
+               name="ReportID"
+               value="@Model.ReportID" />
 
         <h4>Write Report</h4>
 
         <div class="mb-4">
 
-            <textarea asp-for="ReportText"
+            <textarea name="ReportText"
                       class="form-control"
                       rows="20"
                       style="width:100%; resize:vertical;"
-                      placeholder="Please write your report here...">
-            </textarea>
+                      placeholder="Please write your report here...">@Model.ReportText</textarea>
 
         </div>
-
 
         <button type="submit"
                 formaction="/CreateReport/SaveDraft"
@@ -59,9 +54,9 @@
         </button>
 
         <button type="submit"
-                formaction="/CreateReport/Publish"
+                formaction="/CreateReport/SendToCustomer"
                 class="btn btn-success">
-            Publish Report
+            Send to Customer
         </button>
 
     </form>

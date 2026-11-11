@@ -1,0 +1,163 @@
+﻿@model IEnumerable<SEWebApp.Models.RecallNotice>
+
+@{
+    ViewData["Title"] = "Recall Notice Database";
+}
+
+<div class="container mt-4">
+
+    <h2>Recall Notice Database</h2>
+
+    <p class="text-muted">
+        Browse the database and select a recall notice
+        to create a report.
+    </p>
+
+    <hr />
+
+    <!-- SORTING DROPDOWN -->
+
+    <div class="row mb-4">
+
+        <div class="col-md-6">
+
+            <form asp-controller="Staff"
+                  asp-action="Index"
+                  method="get">
+
+                <label for="sortOrder" class="form-label">
+                    Sort Recall Notices
+                </label>
+
+                <div class="input-group">
+
+                    <select name="sortOrder"
+                            id="sortOrder"
+                            class="form-select">
+
+                        <option value="product_asc"
+                                selected="@(ViewBag.SortOrder == "product_asc")">
+                            Product Code (A - Z)
+                        </option>
+
+                        <option value="product_desc"
+                                selected="@(ViewBag.SortOrder == "product_desc")">
+                            Product Code (Z - A)
+                        </option>
+
+                        <option value="date_asc"
+                                selected="@(ViewBag.SortOrder == "date_asc")">
+                            Termination Year (Oldest - Newest)
+                        </option>
+
+                        <option value="date_desc"
+                                selected="@(ViewBag.SortOrder == "date_desc")">
+                            Termination Year (Newest - Oldest)
+                        </option>
+
+                    </select>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Sort
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <hr />
+
+    <!-- RECALL NOTICE TABLE -->
+
+    <h4>All Recall Notices</h4>
+
+    <p class="text-muted">
+        Select one recall notice using the radio button.
+    </p>
+
+    <form action="/CreateReport/Index"
+          method="get">
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Select</th>
+                        <th>Recall Number</th>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Firm Name</th>
+                        <th>Recall Class</th>
+                        <th>Termination Date</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var notice in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                <input type="radio"
+                                       name="recallNumber"
+                                       value="@notice.RECALL_NUMBER"
+                                       required />
+                            </td>
+
+                            <td>
+                                @notice.RECALL_NUMBER
+                            </td>
+
+                            <td>
+                                @notice.PRODUCT_CODE
+                            </td>
+
+                            <td>
+                                @notice.PRODUCT_CODE_NAME
+                            </td>
+
+                            <td>
+                                @notice.FIRM_NAME
+                            </td>
+
+                            <td>
+                                @notice.RECALL_CLASS
+                            </td>
+
+                            <td>
+                                @notice.TERMINATION_DT
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- CONFIRM SELECTION BUTTON -->
+
+        <div class="mt-4 mb-5">
+
+            <button type="submit"
+                    class="btn btn-success btn-lg">
+                Confirm Selection
+            </button>
+
+        </div>
+
+    </form>
+
+</div>

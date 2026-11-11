@@ -9,7 +9,7 @@ namespace SEWebApp.Models
 
         public string PRODUCT_CODE { get; set; } = "";
         public string PRODUCT_CODE_NAME { get; set; } = "";
-        public int REGULATION_NUMBER { get; set; } = 0;
+        public string REGULATION_NUMBER { get; set; } = "";
         public string PRODUCT_DESCRIPTION { get; set; } = "";
         public string TRADE_NAME { get; set; } = "";
         public string RECALL_CLASS { get; set; } = "";
