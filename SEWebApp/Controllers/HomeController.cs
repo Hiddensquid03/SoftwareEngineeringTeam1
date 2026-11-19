@@ -20,7 +20,7 @@ namespace SEWebApp.Controllers
                 (username == "user" && password == "userpass"))
             {
                 // Successful login -> Redirects to your Privacy page
-                return RedirectToAction("Index", "Staff");
+                return RedirectToAction("Index", "Home");
             }
 
             // Failed login -> Pass error via ViewBag

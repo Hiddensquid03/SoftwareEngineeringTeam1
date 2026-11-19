@@ -4,40 +4,140 @@
     ViewData["Title"] = "Device Details";
 }
 
-<link rel="stylesheet" href="~/css/customer.css" />
 
-<div class="container">
 
-    <h1>Medical Device Recall Details</h1>
+<link rel="stylesheet" href="~/css/customer.css" asp-append-version="true" />
 
-    <hr />
 
-    <h2>@Model.Title</h2>
 
-    <p>
-        <strong>Manufacturer:</strong>
-        @Model.Manufacturer
-    </p>
+<div class="device-details-page">
 
-    <p>
-        <strong>Recall Date:</strong>
-        @Model.NoticeDate.ToString("dd MMMM yyyy")
-    </p>
+    <div class="device-details-header">
+        <p class="device-eyebrow">MEDICAL DEVICE SAFETY PLATFORM</p>
+        <h1>Medical Device Recall Details</h1>
+        <p>Review important device information and safety notices.</p>
+    </div>
 
-    <p>
-        <strong>Number of Comments:</strong>
-        @Model.CommentCount
-    </p>
+    <div class="device-details-card">
 
-    <h3>Description</h3>
+        <div class="device-title-section">
+            <div>
+                <p class="device-eyebrow">RECALL NOTICE</p>
+                <h2>@Model.Title</h2>
+            </div>
+        </div>
 
-    <p>@Model.Description</p>
+        <div class="device-info-grid">
 
-    <hr />
+            <div class="device-info-item">
+                <span>Manufacturer</span>
+                <strong>@Model.Manufacturer</strong>
+            </div>
 
-    <a asp-controller="Customer"
-       asp-action="Index">
-        ← Back to Recall Notices
-    </a>
+            <div class="device-info-item">
+                <span>Recall Date</span>
+                <strong>@Model.NoticeDate.ToString("dd MMMM yyyy")</strong>
+            </div>
+
+            <div class="device-info-item">
+                <span>Comments</span>
+                <strong>@Model.CommentCount</strong>
+            </div>
+
+        </div>
+
+        <div class="device-description-section">
+            <h3>Device Description</h3>
+            <p>@Model.Description</p>
+        </div>
+
+        
+        <!-- Employee Findings Section -->
+        <section class="device-findings-section">
+
+            <h3>Employee Risk Assessment</h3>
+
+            <div class="device-findings-grid">
+
+                <div class="device-finding-item">
+                    <span>Review Status</span>
+                    <strong>Example Review</strong>
+                </div>
+
+                <div class="device-finding-item">
+                    <span>Risk Level</span>
+                    <strong>Not yet assigned</strong>
+                </div>
+
+            </div>
+
+            <div class="device-finding-summary">
+                <h4>Employee Findings</h4>
+
+                <p>
+                    Employee findings will appear here once
+                    a risk review has been shared with the customer.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- Customer Comments Section -->
+        <section class="device-comments-section">
+
+            <div class="device-comments-header">
+                <h3>Discussion & Comments</h3>
+                <p>
+                    Read feedback and discuss the findings
+                    shared by the employee.
+                </p>
+            </div>
+
+            <div class="device-comments-list">
+                <p class="device-no-comments">
+                    Comments will appear here when
+                    the database is connected.
+                </p>
+            </div>
+
+            <div class="device-comment-form">
+                <h4>Add Your Comment</h4>
+
+                <label for="customerComment">
+                    Your Comment
+                </label>
+
+                <textarea id="customerComment"
+                          name="commentText"
+                          rows="5"
+                          maxlength="2000"
+                          placeholder="Write your comment here..."
+                          disabled></textarea>
+
+                <p class="device-comment-note">
+                    Comment submission will be enabled once
+                    customer login and database storage are connected.
+                </p>
+
+                <button type="button"
+                        class="device-comment-button"
+                        disabled>
+                    Post Comment
+                </button>
+            </div>
+
+        </section>
+
+
+
+        <div class="device-actions">
+            <a asp-controller="Customer"
+               asp-action="Index"
+               class="device-back-button">
+                &larr; Back to Shared Reviews
+            </a>
+        </div>
+
+    </div>
 
 </div>
