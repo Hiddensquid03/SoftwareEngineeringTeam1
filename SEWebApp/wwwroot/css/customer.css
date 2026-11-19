@@ -435,6 +435,88 @@
     }
 }
 
+
+/* ===== CUSTOMER MAIN PAGE ANIMATIONS ===== */
+
+/* Smooth entrance when the page loads */
+@keyframes customerPageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animate recall notice cards */
+.notice-card {
+    animation: customerPageEnter 0.6s ease-out both;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+    /* Cards appear one after another */
+    .notice-card:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .notice-card:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .notice-card:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .notice-card:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    /* Card lifts when the mouse moves over it */
+    .notice-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.13);
+        border-color: #93c5fd;
+    }
+
+/* Smooth search input interaction */
+input[name="search"] {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+    input[name="search"]:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+/* Smooth sorting dropdown interaction */
+select[name="sort"] {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+    select[name="sort"]:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+    }
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .notice-card {
+        animation: none;
+        transition: none;
+    }
+
+    input[name="search"],
+    select[name="sort"] {
+        transition: none;
+    }
+}
+
+
 /* Apply animation to the details page */
 .device-details-page {
     animation: detailPageEnter 0.6s ease-out both;
