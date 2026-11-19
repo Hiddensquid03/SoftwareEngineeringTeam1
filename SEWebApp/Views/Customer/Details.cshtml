@@ -1,0 +1,43 @@
+﻿@model SEWebApp.Models.CustomerNoticeViewModel
+
+@{
+    ViewData["Title"] = "Device Details";
+}
+
+<link rel="stylesheet" href="~/css/customer.css" />
+
+<div class="container">
+
+    <h1>Medical Device Recall Details</h1>
+
+    <hr />
+
+    <h2>@Model.Title</h2>
+
+    <p>
+        <strong>Manufacturer:</strong>
+        @Model.Manufacturer
+    </p>
+
+    <p>
+        <strong>Recall Date:</strong>
+        @Model.NoticeDate.ToString("dd MMMM yyyy")
+    </p>
+
+    <p>
+        <strong>Number of Comments:</strong>
+        @Model.CommentCount
+    </p>
+
+    <h3>Description</h3>
+
+    <p>@Model.Description</p>
+
+    <hr />
+
+    <a asp-controller="Customer"
+       asp-action="Index">
+        ← Back to Recall Notices
+    </a>
+
+</div>

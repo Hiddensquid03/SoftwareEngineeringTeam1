@@ -85,5 +85,23 @@ namespace SEWebApp.Controllers
 
             return View(notices);
         }
+
+        public IActionResult Details(int id)
+        {
+            // Temporary device information until the database is connected.
+            var device = new CustomerNoticeViewModel
+            {
+                Id = id,
+                Title = "Infusion Pump Recall",
+                Manufacturer = "MedTech Ltd",
+                NoticeDate = new DateTime(2026, 1, 15),
+                CommentCount = 3,
+                Description = "This medical device has been recalled due to a potential safety issue. Customers should review the manufacturer's instructions."
+            };
+
+            return View(device);
+        }
+
     }
 }
+
