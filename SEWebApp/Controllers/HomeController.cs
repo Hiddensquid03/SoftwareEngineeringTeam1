@@ -20,19 +20,12 @@ namespace SEWebApp.Controllers
                 (username == "user" && password == "userpass"))
             {
                 // Successful login -> Redirects to your Privacy page
-                return RedirectToAction("Privacy");
+                return RedirectToAction("Index", "Staff");
             }
 
             // Failed login -> Pass error via ViewBag
             ViewBag.Error = "Invalid username or password.";
             return View("Index");
-        }
-
-        // GET: /Home/Privacy
-        [HttpGet]
-        public IActionResult Privacy()
-        {
-            return View(); // Looks for Views/Home/Privacy.cshtml
         }
     }
 }
