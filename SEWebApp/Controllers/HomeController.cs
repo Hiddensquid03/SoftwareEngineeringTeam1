@@ -16,12 +16,16 @@ namespace SEWebApp.Controllers
         public IActionResult Login(string username, string password)
         {
             // Simple validation check
-            if ((username == "admin" && password == "password") ||
-                (username == "user" && password == "userpass"))
+
+            if (username == "admin" && password == "password")
             {
-                // Successful login -> Redirects to your Privacy page
                 return RedirectToAction("Index", "Home");
             }
+            else if (username == "user" && password == "userpass")
+            {
+                return RedirectToAction("Index", "Customer");
+            }
+
 
             // Failed login -> Pass error via ViewBag
             ViewBag.Error = "Invalid username or password.";
