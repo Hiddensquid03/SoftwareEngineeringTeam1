@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Customer access to shared medical device safety and recall findings.">
+  <title>DeviceSafe | Shared safety findings</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar"><div class="wrap nav">
+    <a class="brand" href="#top"><span class="brand-icon">+</span> DeviceSafe</a>
+    <nav aria-label="Main navigation"><a href="#notices">Safety notices</a><a href="#about">About</a></nav>
+  </div></header>
+  <main id="top">
+    <section class="hero"><div class="wrap hero-inner">
+      <div><span class="eyebrow">MEDICAL DEVICE SAFETY</span>
+      <h1>Clear information.<br><span>Safer decisions.</span></h1>
+      <p>Read safety and recall findings shared by our review team. Search for a device, check the details and join the discussion.</p>
+      <a class="primary-link" href="#notices">Browse shared notices <span aria-hidden="true">→</span></a></div>
+      <div class="hero-note"><span class="note-icon" aria-hidden="true">✓</span><strong>Shared findings</strong><p>Device information, review notes and customer comments in one place.</p></div>
+    </div></section>
+    <section class="wrap content" id="notices">
+      <div class="section-title"><div><span class="eyebrow">LATEST UPDATES</span><h2>Safety notices</h2><p>Only notices shared with customers are shown here.</p></div><span class="tag">Customer view</span></div>
+      <div class="filters">
+        <div class="field search-field"><label for="search">Search notices</label><input id="search" type="search" placeholder="Device, manufacturer or keyword" autocomplete="off" aria-controls="suggestions"><div id="suggestions" class="suggestions" role="listbox" aria-label="Search suggestions"></div></div>
+        <div class="field"><label for="sort">Sort by</label><select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></div>
+        <div class="field"><label for="month">Month</label><input id="month" type="month"></div>
+      </div>
+      <div class="filter-actions"><button id="january" class="chip" type="button">January 2026</button><button id="clear" class="chip muted" type="button">Clear filters</button></div>
+      <p class="results" id="count" role="status">Loading notices…</p>
+      <div class="cards" id="cards"></div>
+      <p id="empty" class="empty" hidden>No notices match your search. Try a different keyword or clear the filters.</p>
+    </section>
+    <section class="about" id="about"><div class="wrap"><h2>About these findings</h2><p>This customer page shows information selected and shared by the review team. In the full platform, employees will manage the notices and decide what is shared.</p><p class="disclaimer"><strong>Coursework demo:</strong> All device names, notices and findings on this page are fictional. Do not use them for medical or safety decisions.</p></div></section>
+  </main>
+  <footer><div class="wrap">DeviceSafe · Medical Device Safety and Recall Notice Platform · Student project</div></footer>
+  <dialog id="commentsDialog" aria-labelledby="dialogTitle"><div class="dialog-head"><div><span class="eyebrow">CUSTOMER DISCUSSION</span><h2 id="dialogTitle">Comments</h2></div><button id="close" class="close" aria-label="Close comments" type="button">×</button></div><p id="dialogFinding" class="finding"></p><h3>Comments</h3><div id="commentsList" class="comment-list"></div><form id="commentForm"><h3>Leave a comment</h3><label for="name">Your name</label><input id="name" maxlength="50" required><label for="message">Your comment</label><textarea id="message" maxlength="600" rows="4" required></textarea><button class="submit" type="submit">Post comment</button><p id="commentStatus" role="status"></p></form></dialog>
+</body>
+</html>
