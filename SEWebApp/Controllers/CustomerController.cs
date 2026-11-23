@@ -33,7 +33,7 @@ namespace SEWebApp.Controllers
                     CommentCount = 12,
                     Description = "Patient monitor safety notice."
                 },
-
+                
                 new CustomerNoticeViewModel
                 {
                     Id = 3,

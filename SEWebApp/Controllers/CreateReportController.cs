@@ -175,5 +175,11 @@ namespace SEWebApp.Controllers
 
             return RedirectToAction("Index", "Staff");
         }
+
+        [HttpPost]
+        public IActionResult CustomerNotice()
+        {
+            return RedirectToAction("Index", "CustomerNotice");
+        }
     }
 }
