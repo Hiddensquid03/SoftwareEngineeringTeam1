@@ -18,9 +18,7 @@ namespace SEWebApp.Controllers
         public async Task<IActionResult> Index(
             string? search, string sort = "newest")
         {
-            // Retrieve reports marked Sent from SQL Server.
-            // TEMPORARY integration test only:
-            // customer-specific access is not implemented yet.
+            // Temporary test: retrieve all sent staff reports.
             var reports = await _context.StaffReports
                 .AsNoTracking()
                 .Where(r => r.Status == "Sent")
@@ -37,28 +35,6 @@ namespace SEWebApp.Controllers
 
                 return new CustomerNoticeViewModel
                 {
-<<<<<<< Updated upstream
-                    Id = 2,
-                    Title = "Patient Monitor Recall",
-                    Manufacturer = "Example Healthcare",
-                    NoticeDate = new DateTime(2026, 9, 15),
-                    CommentCount = 12,
-                    Description = "Patient monitor safety notice."
-                },
-                
-                new CustomerNoticeViewModel
-                {
-                    Id = 3,
-                    Title = "Ventilator Product Recall",
-                    Manufacturer = "Example Devices",
-                    NoticeDate = new DateTime(2026, 8, 2),
-                    CommentCount = 3,
-                    Description = "Ventilator product recall notice."
-                }
-            };
-
-            // Search by notice title or manufacturer.
-=======
                     Id = report.ReportID,
                     RecallNumber = report.RECALL_NUMBER,
                     Title = recall?.TRADE_NAME
@@ -73,7 +49,7 @@ namespace SEWebApp.Controllers
                 };
             }).ToList();
 
->>>>>>> Stashed changes
+            // Search
             if (!string.IsNullOrWhiteSpace(search))
             {
                 notices = notices.Where(n =>
@@ -87,19 +63,24 @@ namespace SEWebApp.Controllers
                 ).ToList();
             }
 
-            notices = sort.ToLowerInvariant() switch
+            // Sorting
+            notices = (sort ?? "newest").ToLowerInvariant() switch
             {
                 "oldest" => notices
-                    .OrderBy(n => n.NoticeDate).ToList(),
+                    .OrderBy(n => n.NoticeDate)
+                    .ToList(),
 
                 "comments" => notices
-                    .OrderByDescending(n => n.CommentCount).ToList(),
+                    .OrderByDescending(n => n.CommentCount)
+                    .ToList(),
 
                 "alphabetical" => notices
-                    .OrderBy(n => n.Title).ToList(),
+                    .OrderBy(n => n.Title)
+                    .ToList(),
 
                 _ => notices
-                    .OrderByDescending(n => n.NoticeDate).ToList()
+                    .OrderByDescending(n => n.NoticeDate)
+                    .ToList()
             };
 
             ViewBag.Search = search;
@@ -107,18 +88,19 @@ namespace SEWebApp.Controllers
 
             return View(notices);
         }
-<<<<<<< Updated upstream
-=======
 
         public async Task<IActionResult> Details(int id)
         {
             var report = await _context.StaffReports
                 .AsNoTracking()
                 .FirstOrDefaultAsync(r =>
-                    r.ReportID == id && r.Status == "Sent");
+                    r.ReportID == id &&
+                    r.Status == "Sent");
 
             if (report == null)
+            {
                 return NotFound();
+            }
 
             var recall = await _context.RecallNotices
                 .AsNoTracking()
@@ -142,6 +124,5 @@ namespace SEWebApp.Controllers
 
             return View(device);
         }
->>>>>>> Stashed changes
     }
 }
