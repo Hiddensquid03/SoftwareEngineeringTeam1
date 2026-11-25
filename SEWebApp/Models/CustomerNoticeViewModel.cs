@@ -14,5 +14,9 @@ namespace SEWebApp.Models
         public int CommentCount { get; set; }
 
         public string Description { get; set; } = "";
+
+        public string RecallNumber { get; set; } = "";
+
+        public string ReportText { get; set; } = "";
     }
 }

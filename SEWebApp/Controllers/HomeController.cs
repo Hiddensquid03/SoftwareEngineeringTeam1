@@ -19,9 +19,9 @@ namespace SEWebApp.Controllers
 
             if (username == "admin" && password == "password")
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Staff");
             }
-            else if (username == "user" && password == "userpass")
+            else if (username == "customer" && password == "password")
             {
                 return RedirectToAction("Index", "Customer");
             }

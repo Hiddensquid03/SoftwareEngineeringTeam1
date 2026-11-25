@@ -16,7 +16,8 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Compile Remove="Views\StaffDraft\Index.cs" />
+		<Compile Remove="Views\StaffDraft\Index.cs"/>
+		<Compile Remove="Controllers\StaffDraftListController.cs" />
 	</ItemGroup>
 
 </Project>

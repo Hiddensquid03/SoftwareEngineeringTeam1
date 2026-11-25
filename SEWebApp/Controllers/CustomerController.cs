@@ -1,51 +1,55 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SEWebApp.Data;
 using SEWebApp.Models;
 
 namespace SEWebApp.Controllers
 {
     public class CustomerController : Controller
     {
-        public IActionResult Index(
-            string? search,
-            string sort = "newest")
+        private readonly AppDBContext _context;
+
+        public CustomerController(AppDBContext context)
         {
-            // Temporary notices for testing.
-            // These represent notices shared with a customer.
-            var notices = new List<CustomerNoticeViewModel>
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index(
+            string? search, string sort = "newest")
+        {
+            // Temporary test: retrieve all sent staff reports.
+            var reports = await _context.StaffReports
+                .AsNoTracking()
+                .Where(r => r.Status == "Sent")
+                .ToListAsync();
+
+            var recalls = await _context.RecallNotices
+                .AsNoTracking()
+                .ToListAsync();
+
+            var notices = reports.Select(report =>
             {
-                new CustomerNoticeViewModel
-                {
-                    Id = 1,
-                    Title = "Infusion Pump Recall",
-                    Manufacturer = "Example Medical",
-                    NoticeDate = new DateTime(2026, 10, 20),
-                    CommentCount = 5,
-                    Description = "Pump safety recall notice."
-                },
+                var recall = recalls.FirstOrDefault(r =>
+                    r.RECALL_NUMBER == report.RECALL_NUMBER);
 
-                new CustomerNoticeViewModel
+                return new CustomerNoticeViewModel
                 {
-                    Id = 2,
-                    Title = "Patient Monitor Recall",
-                    Manufacturer = "Example Healthcare",
-                    NoticeDate = new DateTime(2026, 9, 15),
-                    CommentCount = 12,
-                    Description = "Patient monitor safety notice."
-                },
+                    Id = report.ReportID,
+                    RecallNumber = report.RECALL_NUMBER,
+                    Title = recall?.TRADE_NAME
+                        ?? report.RECALL_NUMBER,
+                    Manufacturer = recall?.FIRM_NAME
+                        ?? "Manufacturer unavailable",
+                    NoticeDate = report.DateCreated,
+                    CommentCount = 0,
+                    Description = recall?.PRODUCT_DESCRIPTION
+                        ?? "Device information unavailable",
+                    ReportText = report.ReportText
+                };
+            }).ToList();
 
-                new CustomerNoticeViewModel
-                {
-                    Id = 3,
-                    Title = "Ventilator Product Recall",
-                    Manufacturer = "Example Devices",
-                    NoticeDate = new DateTime(2026, 8, 2),
-                    CommentCount = 3,
-                    Description = "Ventilator product recall notice."
-                }
-            };
-
-            // Search by notice title or manufacturer.
+            // Search
             if (!string.IsNullOrWhiteSpace(search))
             {
                 notices = notices.Where(n =>
@@ -59,8 +63,8 @@ namespace SEWebApp.Controllers
                 ).ToList();
             }
 
-            // Sort notices based on the selected option.
-            notices = sort.ToLowerInvariant() switch
+            // Sorting
+            notices = (sort ?? "newest").ToLowerInvariant() switch
             {
                 "oldest" => notices
                     .OrderBy(n => n.NoticeDate)
@@ -79,29 +83,46 @@ namespace SEWebApp.Controllers
                     .ToList()
             };
 
-            // Keep selected values after submitting.
             ViewBag.Search = search;
             ViewBag.Sort = sort;
 
             return View(notices);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            // Temporary device information until the database is connected.
+            var report = await _context.StaffReports
+                .AsNoTracking()
+                .FirstOrDefaultAsync(r =>
+                    r.ReportID == id &&
+                    r.Status == "Sent");
+
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            var recall = await _context.RecallNotices
+                .AsNoTracking()
+                .FirstOrDefaultAsync(r =>
+                    r.RECALL_NUMBER == report.RECALL_NUMBER);
+
             var device = new CustomerNoticeViewModel
             {
-                Id = id,
-                Title = "Infusion Pump Recall",
-                Manufacturer = "MedTech Ltd",
-                NoticeDate = new DateTime(2026, 1, 15),
-                CommentCount = 3,
-                Description = "This medical device has been recalled due to a potential safety issue. Customers should review the manufacturer's instructions."
+                Id = report.ReportID,
+                RecallNumber = report.RECALL_NUMBER,
+                Title = recall?.TRADE_NAME
+                    ?? report.RECALL_NUMBER,
+                Manufacturer = recall?.FIRM_NAME
+                    ?? "Manufacturer unavailable",
+                NoticeDate = report.DateCreated,
+                CommentCount = 0,
+                Description = recall?.PRODUCT_DESCRIPTION
+                    ?? "Device information unavailable",
+                ReportText = report.ReportText
             };
 
             return View(device);
         }
-
     }
 }
-

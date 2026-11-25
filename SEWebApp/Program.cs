@@ -14,6 +14,18 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 
 var app = builder.Build();
 
+// Load FDA recall records into the database
+// Only while running in Development mode.
+if (app.Environment.IsDevelopment())
+{
+    await RecallDataSeeder.SeedAsync(
+        app.Services,
+        Path.Combine(
+            app.Environment.ContentRootPath,
+            "Data",
+            "recalls.json"));
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
