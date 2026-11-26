@@ -124,5 +124,53 @@ namespace SEWebApp.Controllers
 
             return View(device);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddComment(
+            int id, string? commentText)
+        {
+            // Check that the staff report exists and was sent.
+            bool reportExists = await _context.StaffReports
+                .AnyAsync(r =>
+                    r.ReportID == id &&
+                    r.Status == "Sent");
+
+            if (!reportExists)
+            {
+                return NotFound();
+            }
+
+            // Check that the customer entered a valid comment.
+            string comment = commentText?.Trim() ?? "";
+
+            if (string.IsNullOrWhiteSpace(comment) ||
+                comment.Length > 2000)
+            {
+                TempData["CommentError"] =
+                    "Please enter a comment of up to 2000 characters.";
+
+                return RedirectToAction("Details", new { id });
+            }
+
+            // Create a new customer comment.
+            var newComment = new CustomerComment
+            {
+                StaffReportId = id,
+                CommentText = comment,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            // Save the comment using Entity Framework Core.
+            _context.CustomerComments.Add(newComment);
+
+            await _context.SaveChangesAsync();
+
+            TempData["CommentSuccess"] =
+                "Your comment has been saved successfully.";
+
+            return RedirectToAction("Details", new { id });
+        }
+
     }
 }

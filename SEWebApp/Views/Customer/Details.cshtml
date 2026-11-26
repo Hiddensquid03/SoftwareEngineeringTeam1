@@ -71,14 +71,20 @@
 
             </div>
 
+            
             <div class="device-finding-summary">
-                <h4>Employee Findings</h4>
+                <h4>Employee Report</h4>
 
-                <p>
-                    Employee findings will appear here once
-                    a risk review has been shared with the customer.
-                </p>
+                @if (!string.IsNullOrWhiteSpace(Model.ReportText))
+                {
+                    <p style="white-space: pre-wrap;">@Model.ReportText</p>
+                }
+                else
+                {
+                    <p>No employee report is available.</p>
+                }
             </div>
+
 
         </section>
 
@@ -94,37 +100,55 @@
             </div>
 
             <div class="device-comments-list">
-                <p class="device-no-comments">
-                    Comments will appear here when
-                    the database is connected.
-                </p>
-            </div>
 
-            <div class="device-comment-form">
-                <h4>Add Your Comment</h4>
+                <div class="device-comment-form">
+                    <h4>Add Your Comment</h4>
 
-                <label for="customerComment">
-                    Your Comment
-                </label>
+                    @if (TempData["CommentSuccess"] != null)
+                    {
+                        <p style="color: green;">
+                            @TempData["CommentSuccess"]
+                        </p>
+                    }
 
-                <textarea id="customerComment"
-                          name="commentText"
-                          rows="5"
-                          maxlength="2000"
-                          placeholder="Write your comment here..."
-                          disabled></textarea>
+                    @if (TempData["CommentError"] != null)
+                    {
+                        <p style="color: red;">
+                            @TempData["CommentError"]
+                        </p>
+                    }
 
-                <p class="device-comment-note">
-                    Comment submission will be enabled once
-                    customer login and database storage are connected.
-                </p>
+                    <form asp-controller="Customer"
+                          asp-action="AddComment"
+                          asp-route-id="@Model.Id"
+                          method="post"
+                          asp-antiforgery="true">
 
-                <button type="button"
-                        class="device-comment-button"
-                        disabled>
-                    Post Comment
-                </button>
-            </div>
+                        <label for="customerComment">
+                            Your Comment
+                        </label>
+
+                        <textarea id="customerComment"
+                                  name="commentText"
+                                  rows="5"
+                                  maxlength="2000"
+                                  required
+                                  placeholder="Write your comment here..."></textarea>
+
+                        <p class="device-comment-note">
+                            Share your feedback about this recall
+                            and the employee's report.
+                        </p>
+
+                        <button type="submit"
+                                class="device-comment-button">
+                            Post Comment
+                        </button>
+                    </form>
+                </div>
+
+           
+           
 
         </section>
 

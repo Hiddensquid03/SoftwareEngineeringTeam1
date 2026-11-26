@@ -14,5 +14,7 @@ namespace SEWebApp.Data
         public DbSet<RecallNotice> RecallNotices { get; set; }
 
         public DbSet<StaffReport> StaffReports { get; set; }
+
+        public DbSet<CustomerComment> CustomerComments { get; set; }
     }
 }

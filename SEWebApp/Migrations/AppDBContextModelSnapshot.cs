@@ -22,6 +22,30 @@ namespace SEWebApp.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("SEWebApp.Models.CustomerComment", b =>
+                {
+                    b.Property<int>("CustomerCommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerCommentId"));
+
+                    b.Property<string>("CommentText")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StaffReportId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomerCommentId");
+
+                    b.ToTable("CustomerComments");
+                });
+
             modelBuilder.Entity("SEWebApp.Models.RecallNotice", b =>
                 {
                     b.Property<string>("RECALL_NUMBER")
