@@ -1,5 +1,23 @@
 ﻿@model IEnumerable<SEWebApp.Models.RecallNotice>
 
+
+    
+<div class="container mt-4">
+    <button type="button"
+            onclick="window.location.href='/Customer/Index'"
+            class="btn btn-secondary">
+        Customer Notices
+    </button>
+
+    <div class="container mt-4">
+        <button type="button"
+                onclick="window.location.href='/Staff/Index'"
+                class="btn btn-secondary">
+            Dashboard
+        </button>
+    </div>
+    
+    
 @{
     ViewData["Title"] = "Recall Notice Database";
 }

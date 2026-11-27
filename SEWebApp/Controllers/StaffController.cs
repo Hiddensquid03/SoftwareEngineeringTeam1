@@ -5,6 +5,8 @@ using SEWebApp.Data;
 
 namespace SEWebApp.Controllers
 {
+
+
     public class StaffController : Controller
     {
         private readonly AppDBContext _context;
@@ -50,5 +52,18 @@ namespace SEWebApp.Controllers
 
             return View(await notices.ToListAsync());
         }
+
+        [HttpPost]
+        public IActionResult CustomerNotice()
+        {
+            return RedirectToAction("Index", "CustomerNotice");
+        }
+
+        [HttpGet]
+        public IActionResult StaffDashboard()
+        {
+            return RedirectToAction("Index", "Staff");
+        }
     }
+
 }

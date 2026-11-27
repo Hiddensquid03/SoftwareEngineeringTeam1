@@ -174,6 +174,20 @@ namespace SEWebApp.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Staff");
+
+            
+        }
+
+        [HttpPost]
+        public IActionResult CustomerNotice()
+        {
+            return RedirectToAction("Index", "CustomerNotice");
+        }
+
+        [HttpGet]
+        public IActionResult CustomerDetails()
+        {
+            return RedirectToAction("Index", "Staff");
         }
     }
 }
